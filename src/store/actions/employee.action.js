@@ -33,6 +33,7 @@ export const createEmployeeFunc = (employeeObj) => async (dispatch) => {
   }
 
 export const updateEmployeeFunc = (employeeObj, employeeId) => async (dispatch) => {
+    debugger
     dispatch({ type: UPDATE_EMPLOYEE_LOADING })
     firebaseDb.child(`Employees/${employeeId}`).set(
         employeeObj,

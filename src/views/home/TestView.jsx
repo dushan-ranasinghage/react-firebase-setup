@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react'
+import EmployeeModal from './EmployeeModal'
 
-const LotTable = ({ employees, deleteEmployeeFunc }) => {
+const TestView = ({ employees, deleteEmployeeFunc, updateEmployeeFunc }) => {
+  const [selectdEmployee, setSelectedEmployee] = useState(null)
+
+  console.log("SELECTD EMPLOYEE", selectdEmployee)
   return (
     <div class="container" style={{ paddingTop: '20px' }}>
       <div class="row">
         <div class="col">
-          <div style={{display:'flex'}}>
-              <h1 style={{flex:1}}>Employees</h1>
-              <div style={{flex:1, display:'flex',justifyContent:'center', marginTop:'5px', marginBottom:'5px'}}>
-                  <button type="button" class="btn btn-secondary" >Add</button>
-              </div>
+          <div style={{ display: 'flex' }}>
+            <h1 style={{ flex: 1 }}>Employees</h1>
+            <div style={{ flex: 1, display: 'flex', justifyContent: 'center', marginTop: '5px', marginBottom: '5px' }}>
+              <button type="button" class="btn btn-secondary" >Add</button>
+            </div>
           </div>
           <table className="table">
             <thead className="thead-dark">
@@ -28,13 +32,22 @@ const LotTable = ({ employees, deleteEmployeeFunc }) => {
                     <td>{employee.preferredFullName}</td>
                     <td>{employee.epfNumber}</td>
                     <td>
-                      <button type="button" class="btn btn-primary" style={{margin:5}}>Edit</button>
                       <button 
-                        type="button" 
-                        class="btn btn-danger" 
-                        style={{margin:5}} 
+                      type="button" 
+                      style={{ margin: 5 }} 
+                      className="btn btn-primary" 
+                      data-toggle="modal" 
+                      data-target="#staticBackdrop"
+                      onClick={() => setSelectedEmployee(employee)}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-danger"
+                        style={{ margin: 5 }}
                         onClick={() => deleteEmployeeFunc(null, employee.userId)}
-                        >Delete</button>
+                      >Delete</button>
                     </td>
                   </tr>
                 )
@@ -43,8 +56,9 @@ const LotTable = ({ employees, deleteEmployeeFunc }) => {
           </table>
         </div>
       </div>
+      {selectdEmployee && <EmployeeModal employee={selectdEmployee} updateEmployeeFunc={updateEmployeeFunc}/>}
     </div>
   )
 }
 
-export default LotTable
+export default TestView
