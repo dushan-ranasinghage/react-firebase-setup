@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 
 import Home from './Home'
 import { getPostsFunc } from '../../store/actions/post.action'
-import { getEmployeesFunc, deleteEmployeeFunc, updateEmployeeFunc } from '../../store/actions/employee.action'
+import { getEmployeesFunc, deleteEmployeeFunc, updateEmployeeFunc, createEmployeeFunc } from '../../store/actions/employee.action'
 
-const HomeContainer = ({ employees, getEmployeesFunc, deleteEmployeeFunc, updateEmployeeFunc }) => {
+const HomeContainer = ({ employees, getEmployeesFunc, deleteEmployeeFunc, updateEmployeeFunc, createEmployeeFunc }) => {
 
     useEffect(() => {
         if(employees.length === 0){
@@ -16,7 +16,7 @@ const HomeContainer = ({ employees, getEmployeesFunc, deleteEmployeeFunc, update
  
     console.log("Employees", employees)
 
-    return <Home employees={employees} deleteEmployeeFunc={deleteEmployeeFunc} updateEmployeeFunc={updateEmployeeFunc}/>
+    return <Home employees={employees} deleteEmployeeFunc={deleteEmployeeFunc} updateEmployeeFunc={updateEmployeeFunc} createEmployeeFunc={createEmployeeFunc}/>
 }
 
 const mapStateToProps = state => {
@@ -25,4 +25,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { getEmployeesFunc, deleteEmployeeFunc, updateEmployeeFunc })(HomeContainer)
+export default connect(mapStateToProps, { getEmployeesFunc, deleteEmployeeFunc, updateEmployeeFunc, createEmployeeFunc })(HomeContainer)

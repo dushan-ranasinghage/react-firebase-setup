@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import EmployeeModal from './EmployeeModal'
+import EmployeeEditModal from './EmployeeEditModal'
 
-const TestView = ({ employees, deleteEmployeeFunc, updateEmployeeFunc }) => {
+const TestView = ({ employees, deleteEmployeeFunc, updateEmployeeFunc, createEmployeeFunc }) => {
   const [selectdEmployee, setSelectedEmployee] = useState(null)
 
   console.log("SELECTD EMPLOYEE", selectdEmployee)
@@ -46,7 +46,7 @@ const TestView = ({ employees, deleteEmployeeFunc, updateEmployeeFunc }) => {
                         type="button"
                         class="btn btn-danger"
                         style={{ margin: 5 }}
-                        onClick={() => deleteEmployeeFunc(null, employee.userId)}
+                        onClick={() => deleteEmployeeFunc(null, employee._id)}
                       >Delete</button>
                     </td>
                   </tr>
@@ -56,7 +56,8 @@ const TestView = ({ employees, deleteEmployeeFunc, updateEmployeeFunc }) => {
           </table>
         </div>
       </div>
-      {selectdEmployee && <EmployeeModal employee={selectdEmployee} updateEmployeeFunc={updateEmployeeFunc}/>}
+      {selectdEmployee && <EmployeeEditModal employee={selectdEmployee} updateEmployeeFunc={updateEmployeeFunc}/>}
+
     </div>
   )
 }
