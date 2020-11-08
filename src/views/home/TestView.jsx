@@ -3,6 +3,7 @@ import EmployeeEditModal from './EmployeeEditModal'
 
 const TestView = ({ employees, deleteEmployeeFunc, updateEmployeeFunc, createEmployeeFunc }) => {
   const [selectdEmployee, setSelectedEmployee] = useState(null)
+  const [selectdEmployeeIndex, setSelectedEmployeeIndex] = useState(null)
 
   console.log("SELECTD EMPLOYEE", selectdEmployee)
   return (
@@ -38,7 +39,10 @@ const TestView = ({ employees, deleteEmployeeFunc, updateEmployeeFunc, createEmp
                       className="btn btn-primary" 
                       data-toggle="modal" 
                       data-target="#staticBackdrop"
-                      onClick={() => setSelectedEmployee(employee)}
+                      onClick={() => {
+                        setSelectedEmployee(employee)
+                        setSelectedEmployeeIndex(index)
+                      }}
                       >
                         Edit
                       </button>
@@ -46,7 +50,7 @@ const TestView = ({ employees, deleteEmployeeFunc, updateEmployeeFunc, createEmp
                         type="button"
                         class="btn btn-danger"
                         style={{ margin: 5 }}
-                        onClick={() => deleteEmployeeFunc(null, employee._id)}
+                        onClick={() => deleteEmployeeFunc(null, index)}
                       >Delete</button>
                     </td>
                   </tr>
@@ -56,7 +60,7 @@ const TestView = ({ employees, deleteEmployeeFunc, updateEmployeeFunc, createEmp
           </table>
         </div>
       </div>
-      {selectdEmployee && <EmployeeEditModal employee={selectdEmployee} updateEmployeeFunc={updateEmployeeFunc}/>}
+      {selectdEmployee && <EmployeeEditModal employee={selectdEmployee} selectdEmployeeIndex={selectdEmployeeIndex} updateEmployeeFunc={updateEmployeeFunc}/>}
 
     </div>
   )

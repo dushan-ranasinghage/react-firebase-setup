@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-const EmployeeEditModal = ({employee, updateEmployeeFunc}) => {
+const EmployeeEditModal = ({employee, selectdEmployeeIndex, updateEmployeeFunc}) => {
     const [fullName, setFullName] = useState(null)
     const [phoneNumber, setPhoneNumber] = useState(null)
 
@@ -37,7 +37,7 @@ const EmployeeEditModal = ({employee, updateEmployeeFunc}) => {
                         <button type="button" className="btn btn-secondary" data-dismiss="modal" data-toggle="modal" 
                       data-target="#staticBackdrop">Close</button>
                         <button type="button" className="btn btn-primary" onClick={() => {
-                            updateEmployeeFunc({...employee, preferredFullName:fullName, phoneNumber: phoneNumber}, employee._id)
+                            updateEmployeeFunc({...employee, preferredFullName:fullName, phoneNumber: phoneNumber}, selectdEmployeeIndex)
                             document.getElementById("modalClose").click()
                             }}>Save</button>
                     </div>
