@@ -1,12 +1,23 @@
 import React from 'react'
+import firebaseDb from '../../config/fbConfig'
 
-const LotTable = ({ posts, postsLoading }) => {
+const LotTable = ({ posts }) => {
+
+  // Employees string is the document that you need under your db
+  firebaseDb.child('Employees').on('value', snapshot => {
+    snapshot.val()
+    console.log(snapshot.val())
+  })
+
   return (
-    <>
-    {posts.map((item, i) => {
-      return <li key={i}>{item.title}</li>
-    })}
-    </>
+    <div class="container" style={{paddingTop:'20px'}}>
+      <div class="row">
+        <div class="col">
+          Home
+          {process.env.REACT_APP_NOT_SECRET_CODE}
+        </div>
+      </div>
+    </div>
   )
 }
 
