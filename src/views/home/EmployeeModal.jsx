@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 const EmployeeModal = ({employee, updateEmployeeFunc}) => {
     const [fullName, setFullName] = useState(null)
     const [phoneNumber, setPhoneNumber] = useState(null)
-    debugger
+
     useEffect(() => {
         setFullName(employee.preferredFullName)
         setPhoneNumber(employee.phoneNumber)
@@ -15,7 +15,7 @@ const EmployeeModal = ({employee, updateEmployeeFunc}) => {
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title" id="staticBackdropLabel">Modal title</h5>
-                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                        <button id="modalClose" type="button" className="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
@@ -34,8 +34,12 @@ const EmployeeModal = ({employee, updateEmployeeFunc}) => {
                         </form>
                     </div>
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" className="btn btn-primary" onClick={() => updateEmployeeFunc(employee, employee.userId)}>Save</button>
+                        <button type="button" className="btn btn-secondary" data-dismiss="modal" data-toggle="modal" 
+                      data-target="#staticBackdrop">Close</button>
+                        <button type="button" className="btn btn-primary" onClick={() => {
+                            updateEmployeeFunc({...employee, preferredFullName:fullName, phoneNumber: phoneNumber}, employee.userId)
+                            document.getElementById("modalClose").click()
+                            }}>Save</button>
                     </div>
                 </div>
             </div>
