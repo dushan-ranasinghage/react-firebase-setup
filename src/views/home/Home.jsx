@@ -2,11 +2,10 @@ import React from 'react'
 
 import Test from './TestView'
 
-const Home = ({ posts }) => {
-    console.log("XXX", posts)
+const Home = ({ employees, deleteEmployeeFunc }) => {
     return (
         <>
-            <Test posts={posts}/>
+            <Test employees={employees} deleteEmployeeFunc={deleteEmployeeFunc}/>
         </>
     )
 }
