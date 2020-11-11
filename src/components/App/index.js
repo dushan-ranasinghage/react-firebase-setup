@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import history from '../../utils/history'
 import { Provider } from 'react-redux';
@@ -8,7 +8,7 @@ import HomeView from '../../views/home/Home.container'
 
 import store from '../../store'
 
-function App() {
+const App = () => {
     return (
         <Provider store={store}>
             <NavBar />

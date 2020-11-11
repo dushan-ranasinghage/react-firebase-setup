@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import EmployeeEditModal from './EmployeeEditModal'
 
-const TestView = ({ employees, deleteEmployeeFunc, updateEmployeeFunc, createEmployeeFunc }) => {
+const EmployeeView = ({ employees, deleteEmployeeFunc, updateEmployeeFunc, createEmployeeFunc }) => {
   const [selectdEmployee, setSelectedEmployee] = useState(null)
   const [selectdEmployeeIndex, setSelectedEmployeeIndex] = useState(null)
+  const [isUnknownUser, setIsUnknownUser] = useState(false);
+
+  useEffect(() => {
+      if(window.location.href.includes("react-firebase-setup")){
+          setIsUnknownUser(true)
+      }
+  },[])
 
   console.log("SELECTD EMPLOYEE", selectdEmployee)
   return (
@@ -12,16 +19,26 @@ const TestView = ({ employees, deleteEmployeeFunc, updateEmployeeFunc, createEmp
         <div class="col">
           <div style={{ display: 'flex' }}>
             <h1 style={{ flex: 1 }}>Employees</h1>
-            <div style={{ flex: 1, display: 'flex', justifyContent: 'center', marginTop: '5px', marginBottom: '5px' }}>
-              <button type="button" class="btn btn-secondary" >Add</button>
+            <div style={{ 
+                flex: 1, 
+                display: 'flex', 
+                justifyContent: 'flex-end', 
+                marginTop: '5px', 
+                marginBottom: '5px', 
+                marginRight: '18px',
+                height: '40px',
+                width: '70px'
+              }}>
+              <button type="button" class="btn btn-secondary" disabled={isUnknownUser? true: false}>Add</button>
             </div>
           </div>
-          <table className="table">
+          <table className="table text-right">
             <thead className="thead-dark">
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
                 <th scope="col">EPF Number</th>
+                <th scope="col">Phone Number</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
@@ -32,6 +49,7 @@ const TestView = ({ employees, deleteEmployeeFunc, updateEmployeeFunc, createEmp
                     <th scope="row">{index + 1}</th>
                     <td>{employee.preferredFullName}</td>
                     <td>{employee.epfNumber}</td>
+                    <td>{employee.phoneNumber}</td>
                     <td>
                       <button 
                       type="button" 
@@ -51,6 +69,7 @@ const TestView = ({ employees, deleteEmployeeFunc, updateEmployeeFunc, createEmp
                         class="btn btn-danger"
                         style={{ margin: 5 }}
                         onClick={() => deleteEmployeeFunc(null, index)}
+                        disabled={isUnknownUser? true: false}
                       >Delete</button>
                     </td>
                   </tr>
@@ -58,6 +77,7 @@ const TestView = ({ employees, deleteEmployeeFunc, updateEmployeeFunc, createEmp
               })}
             </tbody>
           </table>
+          {isUnknownUser && <h1>If you see this you won't be able to use some operations in this site.</h1>}
         </div>
       </div>
       {selectdEmployee && <EmployeeEditModal employee={selectdEmployee} selectdEmployeeIndex={selectdEmployeeIndex} updateEmployeeFunc={updateEmployeeFunc}/>}
@@ -66,4 +86,4 @@ const TestView = ({ employees, deleteEmployeeFunc, updateEmployeeFunc, createEmp
   )
 }
 
-export default TestView
+export default EmployeeView
