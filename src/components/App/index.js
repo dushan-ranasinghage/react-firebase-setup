@@ -12,8 +12,8 @@ import store from '../../store'
 const App = () => {
     return (
         <Provider store={store}>
-            <NavBar />
             <Router history={history}>
+                <NavBar />
                 <Switch>
                     <Route exact path="/" component={HomeView} />
                     <Route exact path="/customers" component={CustomerView} />

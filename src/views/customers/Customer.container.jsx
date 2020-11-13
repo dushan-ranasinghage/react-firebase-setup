@@ -2,22 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 
 import Customer from './Customer'
-import firebase from '../../config/fbConfig'
+import { getCustomersFunc } from '../../store/actions/customer.action'
+const CustomerContainer = ({ getCustomersFunc, customers }) => {
 
-const firestore = firebase.firestore()
-
-const CustomerContainer = ( ) => {
-    const [customers, setCustomers] = useState([]);
-    const ref = firestore.collection('employees');
 
     useEffect(()=>{
-        ref.onSnapshot(querSnapshot => {
-            const items = []
-            querSnapshot.forEach(doc => {
-              items.push(doc.data())
-            })
-            setCustomers(items)
-          })
+        getCustomersFunc()
     }, [])
 
     console.log("Customers", customers)
@@ -27,8 +17,8 @@ const CustomerContainer = ( ) => {
 
 const mapStateToProps = state => {
     return { 
-        
+        customers: state.customer.customers
     }
 }
 
-export default connect(mapStateToProps, { })(CustomerContainer)
+export default connect(mapStateToProps, { getCustomersFunc })(CustomerContainer)

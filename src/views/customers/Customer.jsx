@@ -2,10 +2,10 @@ import React from 'react'
 
 import CustomerView from './CustomerView'
 
-const Customer = ( ) => {
+const Customer = ({ customers }) => {
     return (
         <>
-            <CustomerView />
+            <CustomerView customers={customers}/>
         </>
     )
 }
