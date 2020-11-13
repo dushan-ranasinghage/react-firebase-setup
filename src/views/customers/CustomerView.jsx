@@ -8,7 +8,7 @@ const EmployeeView = () => {
             setIsUnknownUser(true)
         }
     },[])
-    
+
     return (
         <div class="container" style={{ paddingTop: '20px' }}>
             <div class="row">
@@ -28,6 +28,51 @@ const EmployeeView = () => {
                             <button type="button" class="btn btn-secondary" disabled={isUnknownUser ? true : false}>Add</button>
                         </div>
                     </div>
+                    {/* <table className="table text-right">
+                        <thead className="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">EPF Number</th>
+                            <th scope="col">Phone Number</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {employees.map((employee, index) => {
+                            return (
+                            <tr key={index}>
+                                <th scope="row">{index + 1}</th>
+                                <td>{employee.preferredFullName}</td>
+                                <td>{employee.epfNumber}</td>
+                                <td>{employee.phoneNumber}</td>
+                                <td>
+                                <button 
+                                type="button" 
+                                style={{ margin: 5 }} 
+                                className="btn btn-primary" 
+                                data-toggle="modal" 
+                                data-target="#staticBackdrop"
+                                onClick={() => {
+                                    setSelectedEmployee(employee)
+                                    setSelectedEmployeeIndex(index)
+                                }}
+                                >
+                                    Edit
+                                </button>
+                                <button
+                                    type="button"
+                                    class="btn btn-danger"
+                                    style={{ margin: 5 }}
+                                    onClick={() => deleteEmployeeFunc(null, index)}
+                                    disabled={isUnknownUser? true: false}
+                                >Delete</button>
+                                </td>
+                            </tr>
+                            )
+                        })}
+                        </tbody>
+                    </table> */}
                 </div>
             </div>
         </div>

@@ -32,6 +32,7 @@ const EmployeeView = ({ employees, deleteEmployeeFunc, updateEmployeeFunc, creat
               <button type="button" class="btn btn-secondary" disabled={isUnknownUser? true: false}>Add</button>
             </div>
           </div>
+          {employees.length > 0 ?
           <table className="table text-right">
             <thead className="thead-dark">
               <tr>
@@ -77,7 +78,13 @@ const EmployeeView = ({ employees, deleteEmployeeFunc, updateEmployeeFunc, creat
               })}
             </tbody>
           </table>
+          :<div class="d-flex justify-content-center">
+          <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>}
           {isUnknownUser && <h1>If you see this you won't be able to use some operations in this site.</h1>}
+          <h3>Real Time Database is used in Employees</h3>
         </div>
       </div>
       {selectdEmployee && <EmployeeEditModal employee={selectdEmployee} selectdEmployeeIndex={selectdEmployeeIndex} updateEmployeeFunc={updateEmployeeFunc}/>}

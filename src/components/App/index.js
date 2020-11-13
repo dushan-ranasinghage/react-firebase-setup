@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 
 import NavBar from '../NavBar'
 import HomeView from '../../views/home/Home.container'
+import CustomerView from '../../views/customers/Customer.container'
 
 import store from '../../store'
 
@@ -15,6 +16,7 @@ const App = () => {
             <Router history={history}>
                 <Switch>
                     <Route exact path="/" component={HomeView} />
+                    <Route exact path="/customers" component={CustomerView} />
                     <Redirect from="/home" to="/" />
                 </Switch>
             </Router>

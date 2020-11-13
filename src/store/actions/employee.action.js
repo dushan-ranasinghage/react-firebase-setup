@@ -4,11 +4,13 @@ import {
     UPDATE_EMPLOYEE_LOADING, UPDATE_EMPLOYEE_SUCCESS, UPDATE_EMPLOYEE_ERROR,
     DELETE_EMPLOYEE_LOADING, DELETE_EMPLOYEE_SUCCESS, DELETE_EMPLOYEE_ERROR
 } from "../types/employee.type";
-import firebaseDb from '../../config/fbConfig'
+import firebase from '../../config/fbConfig'
+
+const ref = firebase.database().ref()
 
 export const getEmployeesFunc = () => async (dispatch) => {
   dispatch({ type: GET_EMPLOYEES_LOADING })
-  firebaseDb.child('Employees').on('value', snapshot => {
+  ref.child('Employees').on('value', snapshot => {
     if(snapshot.val().length > 0){
         dispatch({ type: GET_EMPLOYEES_SUCCESS, employees: snapshot.val() })
     } else{
@@ -19,7 +21,7 @@ export const getEmployeesFunc = () => async (dispatch) => {
 
 export const createEmployeeFunc = (employeeObj) => async (dispatch) => {
     dispatch({ type: CREATE_EMPLOYEE_LOADING })
-    firebaseDb.child('Employees').push(
+    ref.child('Employees').push(
         employeeObj,
         err => {
             if(err){
@@ -35,7 +37,7 @@ export const createEmployeeFunc = (employeeObj) => async (dispatch) => {
 export const updateEmployeeFunc = (employeeObj, employeeId) => async (dispatch) => {
     debugger
     dispatch({ type: UPDATE_EMPLOYEE_LOADING })
-    firebaseDb.child(`Employees/${employeeId}`).set(
+    ref.child(`Employees/${employeeId}`).set(
         employeeObj,
         err => {
             if(err){
@@ -50,7 +52,7 @@ export const updateEmployeeFunc = (employeeObj, employeeId) => async (dispatch) 
 
   export const deleteEmployeeFunc = (employeeObj, employeeId) => async (dispatch) => {
     dispatch({ type: DELETE_EMPLOYEE_LOADING })
-    firebaseDb.child(`Employees/${employeeId}`).remove(
+    ref.child(`Employees/${employeeId}`).remove(
         err => {
             if(err){
                 console.log(err)
